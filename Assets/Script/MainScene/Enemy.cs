@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private float _hp;
+    public float hp = 30f;
     public Object destroyEffect;
     public Object touchEffect;
     public AudioClip destroyAudio;
@@ -17,21 +17,15 @@ public class Enemy : MonoBehaviour
         AudioSource.PlayClipAtPoint(touchAudio, transform.position);
         Destroy(gameObject);
     }
-    void Start()
-    {
-        _hp = 30.0f;
-        
-
-    }
 
     public IEnumerator Damage(float miunsBlood)
     {
-        _hp -= miunsBlood;
+        hp -= miunsBlood;
 
-        Debug.Log(_hp);
-        if (_hp <= 0)
+        Debug.Log(hp);
+        if (hp <= 0)
         {
-            _hp = 0;
+            hp = 0;
             GameObject gEffect = Instantiate(destroyEffect) as GameObject;
             gEffect.transform.position = transform.position;
             yield return new WaitForSeconds(0.3f);

@@ -47,7 +47,7 @@ public class FPSControl : MonoBehaviour
         transform.position = transform.position + moveAmount;
         controlCamera.position = Vector3.Lerp(transform.position, cameraFollowPT.position, 0.8f);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
             AudioSource.PlayClipAtPoint(shootAudio, transform.position);
 
