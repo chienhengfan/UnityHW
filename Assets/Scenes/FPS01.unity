@@ -1084,6 +1084,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1189206892}
   - component: {fileID: 1189206891}
+  - component: {fileID: 1189206893}
   m_Layer: 0
   m_Name: EnemySprawler
   m_TagString: Untagged
@@ -1103,7 +1104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60199154b2958e447835d6af06c9f167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyObject: {fileID: 1285605860451404319, guid: f5d6f4b591c721543bf3c02c918ca5bf, type: 3}
+  enemyName: Mummy_Mon
   enemyNumber: 10
 --- !u!4 &1189206892
 Transform:
@@ -1120,6 +1121,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1189206893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189206890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59b08b2cf3e518e438a064fe60ff438b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1300044352
 GameObject:
   m_ObjectHideFlags: 0

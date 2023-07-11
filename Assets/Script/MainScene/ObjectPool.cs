@@ -6,45 +6,68 @@ public class ObjectPool : MonoBehaviour
 {
     public class GameObjectData
     {
-        public GameObject gameobject;
+        public GameObject dataObject;
         public bool IsUsing;
     }
 
-    private ObjectPool _instane = null;
-    public ObjectPool Instance() { return _instane; }
-    private List<GameObjectData> poolList;
+    public class ListObjectData
+    {
+        public object dataSource;
+        public List<GameObjectData> poolDataList;
+    }
+
+    private static ObjectPool _instane = null;
+    public static ObjectPool Instance() { return _instane; }
+    private ListObjectData pool;
 
     private void Awake()
     {
         _instane = this;
     }
 
-    public void InitObjectPool(int number, GameObject gameobject)
+    public void InitObjectPool(int number, GameObject go)
     {
-        poolList = new List<GameObjectData>();
+        pool = new ListObjectData();
+        pool.dataSource = go;
+        pool.poolDataList = new List<GameObjectData>();
         for(int i = 0; i < number; i++)
         {
-            GameObject tempObject = GameObject.Instantiate(gameobject) as GameObject;
+            GameObject tempObject = GameObject.Instantiate(go) as GameObject;
             GameObjectData data = new GameObjectData();
-            data.gameobject = tempObject;
+            data.dataObject = tempObject;
             data.IsUsing = false;
 
             tempObject.SetActive(false);
-            poolList.Add(data);
+            pool.poolDataList.Add(data);
         }
     }
 
     public GameObject LoadObjectFromPool()
     {
-        int count = poolList.Count;
+        int count = pool.poolDataList.Count;
         for(int i = 0; i < count; i++)
         {
-            GameObjectData data = poolList[i];
+            GameObjectData data = pool.poolDataList[i];
             if (data.IsUsing) { continue; }
 
             data.IsUsing = true;
-            return data.gameobject;
+            return data.dataObject;
         }
         return null;
+    }
+
+    public void UnLoadObjectToPool(GameObject gameObject)
+    {
+        int count = pool.poolDataList.Count;
+        for (int i = 0; i < count; i++)
+        {
+            GameObjectData data = pool.poolDataList[i];
+            if (data.dataObject == gameObject)
+            {
+                data.dataObject.SetActive(false);
+                data.IsUsing = false;
+                return;
+            }
+        }
     }
 }

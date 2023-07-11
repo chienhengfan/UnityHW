@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
             gEffect.transform.position = transform.position;
             yield return new WaitForSeconds(0.3f);
             AudioSource.PlayClipAtPoint(destroyAudio, transform.position);
-            Destroy(gameObject);
+            EnemySprawler.Instance().RemoveEnemy(this.gameObject);
         }
     }
 }
