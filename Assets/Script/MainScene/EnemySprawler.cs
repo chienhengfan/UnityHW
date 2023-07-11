@@ -8,7 +8,7 @@ public class EnemySprawler : MonoBehaviour
     public  static EnemySprawler Instance() { return _instance; }
     private GameObject enemyObject;
     public string enemyName = "Mummy_Mon";
-    private List<GameObject> _enemies = new List<GameObject>();
+    private List<GameObjectData> _enemies = new List<GameObjectData>();
     public int enemyNumber;
     void Awake()
     {
@@ -17,7 +17,7 @@ public class EnemySprawler : MonoBehaviour
 
     private void Start()
     {
-        GenerateEnemies(enemyNumber);
+        StartCoroutine(ResourceLoader.Instance().LoadGameObjectAsync(enemyName, FinishAsynicLoadGameObject));
     }
 
     private void Update()
@@ -25,12 +25,19 @@ public class EnemySprawler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G)) { GenerateEnemies(enemyNumber); }
     }
 
+    void FinishAsynicLoadGameObject(Object o)
+    {
+        enemyObject = o as GameObject;
+        ObjectPool.Instance().InitObjectPool(enemyNumber, enemyObject);
+        Debug.Log(enemyObject);
+    }
     public void RemoveEnemy(GameObject enemyShouldRemoved)
     {
         ObjectPool pool = ObjectPool.Instance();
         for (int i = 0; i < _enemies.Count; i++)
         {
-            if (_enemies[i] == enemyShouldRemoved)
+            GameObjectData data = _enemies[i];
+            if (data.dataObject == enemyShouldRemoved)
             {
                 _enemies.RemoveAt(i);
                 pool.UnLoadObjectToPool(enemyShouldRemoved);
@@ -40,10 +47,15 @@ public class EnemySprawler : MonoBehaviour
 
     public void GenerateEnemies(int num)
     {
-        enemyObject = (enemyObject == null) ? ResourceLoader.Instance().LoadGameObject(enemyName) : enemyObject;
+        //enemyObject = (enemyObject == null) ? ResourceLoader.Instance().LoadGameObject(enemyName) : enemyObject;
+        _enemies = (_enemies == null) ? new List<GameObjectData>() : _enemies;
 
+        ObjectPool pool = ObjectPool.Instance(); 
         for (int i = 0; i < num; i++)
         {
+            GameObjectData data = pool.LoadObjectFromPool();
+            GameObject dataObject = data.dataObject;
+
             Vector3 vecdir = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-0.5f, 0.5f));
 
             if (vecdir.magnitude == 0.0f)
@@ -51,8 +63,9 @@ public class EnemySprawler : MonoBehaviour
                 vecdir.x = 0.7f;
             }
             vecdir.Normalize();
-            enemyObject.transform.position = vecdir * Random.Range(1f, 5f);
-            _enemies[i] = enemyObject;
+            dataObject.transform.position = vecdir * Random.Range(1f, 5f);
+            dataObject.SetActive(true);
+            _enemies.Add(data);
 
         }
     }

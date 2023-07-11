@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    public class GameObjectData
-    {
-        public GameObject dataObject;
-        public bool IsUsing;
-    }
-
-    public class ListObjectData
-    {
-        public object dataSource;
-        public List<GameObjectData> poolDataList;
-    }
-
     private static ObjectPool _instane = null;
     public static ObjectPool Instance() { return _instane; }
     private ListObjectData pool;
@@ -42,7 +30,7 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    public GameObject LoadObjectFromPool()
+    public GameObjectData LoadObjectFromPool()
     {
         int count = pool.poolDataList.Count;
         for(int i = 0; i < count; i++)
@@ -51,7 +39,7 @@ public class ObjectPool : MonoBehaviour
             if (data.IsUsing) { continue; }
 
             data.IsUsing = true;
-            return data.dataObject;
+            return data;
         }
         return null;
     }

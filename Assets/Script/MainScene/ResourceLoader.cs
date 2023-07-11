@@ -11,7 +11,14 @@ public class ResourceLoader : MonoBehaviour
     public GameObject LoadGameObject(string name)
     {
         GameObject go = Resources.Load(name) as GameObject;
-        Debug.Log(go);
         return go;
+    }
+
+    public IEnumerator LoadGameObjectAsync(string name, System.Action<Object> act)
+    {
+        ResourceRequest resource = Resources.LoadAsync(name);
+        yield return resource;
+
+        if(resource.isDone && resource.asset != null) { act(resource.asset); }
     }
 }
