@@ -8,11 +8,11 @@ public class EnemySprawler : MonoBehaviour
     public  static EnemySprawler Instance() { return _instance; }
     private GameObject enemyObject;
     public string enemyName = "Mummy_Mon";
-    private List<GameObjectData> _enemies = new List<GameObjectData>();
+    private List<GameObjectData> _enemies;
     public int enemyNumber;
     void Awake()
     {
-        _instance = this;
+        _instance = this;       
     }
 
     private void Start()
@@ -39,7 +39,8 @@ public class EnemySprawler : MonoBehaviour
             GameObjectData data = _enemies[i];
             if (data.dataObject == enemyShouldRemoved)
             {
-                _enemies.RemoveAt(i);
+                _enemies.RemoveAt(i);1
+                //data.dataObject.SetActive(false);
                 pool.UnLoadObjectToPool(enemyShouldRemoved);
             }
         }
@@ -48,6 +49,8 @@ public class EnemySprawler : MonoBehaviour
     public void GenerateEnemies(int num)
     {
         //enemyObject = (enemyObject == null) ? ResourceLoader.Instance().LoadGameObject(enemyName) : enemyObject;
+
+        // if I don't kill all enemy and want to generate enemy, bug will appear because object reference is null
         _enemies = (_enemies == null) ? new List<GameObjectData>() : _enemies;
 
         ObjectPool pool = ObjectPool.Instance(); 

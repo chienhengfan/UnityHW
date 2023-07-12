@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     public AudioClip destroyAudio;
     public AudioClip touchAudio;
 
+
+
     private void OnTriggerEnter(Collider other)
     {
         GameObject gEffect = Instantiate(touchEffect) as GameObject;
@@ -30,7 +32,7 @@ public class Enemy : MonoBehaviour
             gEffect.transform.position = transform.position;
             yield return new WaitForSeconds(0.3f);
             AudioSource.PlayClipAtPoint(destroyAudio, transform.position);
-            EnemySprawler.Instance().RemoveEnemy(this.gameObject);
+            EnemySprawler.Instance().RemoveEnemy(gameObject);
         }
     }
 }
