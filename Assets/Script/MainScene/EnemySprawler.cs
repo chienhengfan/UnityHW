@@ -39,7 +39,7 @@ public class EnemySprawler : MonoBehaviour
             GameObjectData data = _enemies[i];
             if (data.dataObject == enemyShouldRemoved)
             {
-                _enemies.RemoveAt(i);1
+                _enemies.RemoveAt(i);
                 //data.dataObject.SetActive(false);
                 pool.UnLoadObjectToPool(enemyShouldRemoved);
             }
