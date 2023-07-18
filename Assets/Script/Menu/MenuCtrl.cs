@@ -15,7 +15,6 @@ public class MenuCtrl : MonoBehaviour
         if(_instance == null)
         {
             _instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -29,6 +28,7 @@ public class MenuCtrl : MonoBehaviour
     }
     void Start()
     {
+        ButtonStateControl buttonStateControl = ButtonStateControl.Instance();
         SceneLoader sceneLoader = SceneLoader.Instance();
         if (sceneLoader == null)
         {
