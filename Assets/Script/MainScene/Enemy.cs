@@ -17,14 +17,16 @@ public class Enemy : MonoBehaviour
         GameObject gEffect = Instantiate(touchEffect) as GameObject;
         gEffect.transform.position = transform.position;
         AudioSource.PlayClipAtPoint(touchAudio, transform.position);
-        Destroy(gameObject);
+        GameObject player = other.gameObject;
+        Debug.Log(player);
+        player.SendMessage("GetHurt", 20f);
+        EnemySprawler.Instance().RemoveEnemy(gameObject);
     }
 
     public IEnumerator Damage(float miunsBlood)
     {
         hp -= miunsBlood;
 
-        Debug.Log(hp);
         if (hp <= 0)
         {
             hp = 0;

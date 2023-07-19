@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class MenuCtrl : MonoBehaviour
+
+public class UIManager : MonoBehaviour
 {
-    private static MenuCtrl _instance = null;
-    private static MenuCtrl Instance() { return _instance; }
+    public Image playerHpBar;
+    private static UIManager _instance = null;
+    public static UIManager Instance() { return _instance; }
     public string sceneStart = "StartScene";
     public string sceneFPS = "FPS01";
-
     void Awake()
     {
-        if(_instance == null)
+        if (_instance == null)
         {
             _instance = this;
         }
@@ -43,7 +45,7 @@ public class MenuCtrl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            if(SceneManager.GetActiveScene().name == sceneStart)
+            if (SceneManager.GetActiveScene().name == sceneStart)
             {
                 SceneLoader.Instance().ChangeScene(sceneFPS);
             }
@@ -53,5 +55,13 @@ public class MenuCtrl : MonoBehaviour
             }
         }
     }
+
+    public void UpdateHpBar(Player player)
+    {
+        float ratio = player.currentHP / player.maxHP;
+        playerHpBar.fillAmount = playerHpBar.fillAmount * ratio;
+
+    }
+
 
 }

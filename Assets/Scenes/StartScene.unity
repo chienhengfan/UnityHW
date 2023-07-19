@@ -152,8 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4467cd0a2fb51419ccd27840eec0d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneStart: StartScene
-  sceneFPS: FPS01
 --- !u!4 &233650179
 Transform:
   m_ObjectHideFlags: 0
@@ -498,11 +496,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218897237}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b4467cd0a2fb51419ccd27840eec0d5, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b666ab8106f40b409d1f9c6223e06a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHpBar: {fileID: 0}
   sceneStart: StartScene
   sceneFPS: FPS01
 --- !u!1 &1354710577

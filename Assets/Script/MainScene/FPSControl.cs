@@ -12,6 +12,7 @@ public class FPSControl : MonoBehaviour
     public AudioClip shootAudio;
 
 
+
     public float rotateSpeed = 1.0f;
     public float moveSpeed = 2.0f;
     public float cameraH = 0.0f;
