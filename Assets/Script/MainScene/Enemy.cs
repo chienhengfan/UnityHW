@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float hp = 30f;
+    public bool IsDead = false;
+    public int scoreOfEnemy = 5;
+    public float currentHP = 30f;
+    public float MaxHP = 30f;
     public Object destroyEffect;
     public Object touchEffect;
     public AudioClip destroyAudio;
     public AudioClip touchAudio;
 
+    public void InitEnemy()
+    {
+        currentHP = MaxHP;
+    }
 
 
     private void OnTriggerEnter(Collider other)
@@ -18,23 +25,30 @@ public class Enemy : MonoBehaviour
         gEffect.transform.position = transform.position;
         AudioSource.PlayClipAtPoint(touchAudio, transform.position);
         GameObject player = other.gameObject;
-        Debug.Log(player);
+        //Debug.Log(player);
         player.SendMessage("GetHurt", 20f);
         EnemySprawler.Instance().RemoveEnemy(gameObject);
     }
 
     public IEnumerator Damage(float miunsBlood)
     {
-        hp -= miunsBlood;
+        currentHP -= miunsBlood;
 
-        if (hp <= 0)
+        if (currentHP <= 0)
         {
-            hp = 0;
+            currentHP = 0;
+            IsDead = true;
             GameObject gEffect = Instantiate(destroyEffect) as GameObject;
             gEffect.transform.position = transform.position;
             yield return new WaitForSeconds(0.3f);
             AudioSource.PlayClipAtPoint(destroyAudio, transform.position);
             EnemySprawler.Instance().RemoveEnemy(gameObject);
         }
+    }
+
+    public int GetScore()
+    {
+        int score = IsDead ? scoreOfEnemy : 0;
+        return score;
     }
 }

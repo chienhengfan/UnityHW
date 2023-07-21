@@ -43,25 +43,23 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            if (SceneManager.GetActiveScene().name == sceneStart)
-            {
-                SceneLoader.Instance().ChangeScene(sceneFPS);
-            }
-            else
-            {
-                SceneLoader.Instance().ChangeScene(sceneStart);
-            }
-        }
+
     }
 
     public void UpdateHpBar(Player player)
     {
         float ratio = player.currentHP / player.maxHP;
-        playerHpBar.fillAmount = playerHpBar.fillAmount * ratio;
+        playerHpBar.fillAmount = (playerHpBar.fillAmount/ playerHpBar.fillAmount) * ratio;
 
     }
 
+    public void ClickStart()
+    {
+        SceneLoader.Instance().ChangeScene(sceneFPS);
+    }
+    public void ClickExit()
+    {
+        SceneLoader.Instance().ChangeScene(sceneStart);
+    }
 
 }

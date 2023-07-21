@@ -12,7 +12,7 @@ public class FPSControl : MonoBehaviour
     public AudioClip shootAudio;
 
 
-
+    public int score = 0;
     public float rotateSpeed = 1.0f;
     public float moveSpeed = 2.0f;
     public float cameraH = 0.0f;
@@ -22,6 +22,7 @@ public class FPSControl : MonoBehaviour
     {
         Vector3 cameraVec = controlCamera.position - transform.position;
         cameraH = cameraVec.y;
+        score = 0;
     }
 
     void Update()
@@ -72,7 +73,9 @@ public class FPSControl : MonoBehaviour
                 {
                     GameObject ey = rh.collider.gameObject;
                     ey.SendMessage("Damage", 30.0f);
-
+                    int plus = ey.GetComponent<Enemy>().GetScore();
+                    score += plus;
+                    //Debug.Log(score);
                 }
 
             }
