@@ -12,4 +12,5 @@ public class Player:MonoBehaviour
     {
         currentHP = maxHP;
     }
+
 }

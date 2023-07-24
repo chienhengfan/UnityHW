@@ -20,6 +20,7 @@ public class PlayerCtrl : MonoBehaviour
         if (player.currentHP < 0)
         {
             player.currentHP = 0;
+            UIManager.Instance().ClickExit();
         }
         UIManager.Instance().UpdateHpBar(player);
     }

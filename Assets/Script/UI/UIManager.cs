@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
 
     void FinishLoadScene(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log("Finish load :" + scene.name);
+        //Debug.Log("Finish load :" + scene.name);
     }
     void Start()
     {
@@ -49,7 +49,7 @@ public class UIManager : MonoBehaviour
     public void UpdateHpBar(Player player)
     {
         float ratio = player.currentHP / player.maxHP;
-        playerHpBar.fillAmount = (playerHpBar.fillAmount/ playerHpBar.fillAmount) * ratio;
+        playerHpBar.fillAmount *= ratio;
 
     }
 

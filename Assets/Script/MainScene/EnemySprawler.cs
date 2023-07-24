@@ -12,7 +12,7 @@ public class EnemySprawler : MonoBehaviour
     public int enemyNumber;
     void Awake()
     {
-        _instance = this;       
+        _instance = this;
     }
 
     private void Start()
@@ -22,6 +22,7 @@ public class EnemySprawler : MonoBehaviour
 
     private void Update()
     {
+       
         if (Input.GetKeyDown(KeyCode.G)) { GenerateEnemies(enemyNumber); }
     }
 
@@ -29,7 +30,6 @@ public class EnemySprawler : MonoBehaviour
     {
         enemyObject = o as GameObject;
         ObjectPool.Instance().InitObjectPool(enemyNumber, enemyObject);
-        Debug.Log(enemyObject);
     }
     public void RemoveEnemy(GameObject enemyShouldRemoved)
     {
@@ -48,7 +48,7 @@ public class EnemySprawler : MonoBehaviour
 
     public void GenerateEnemies(int num)
     {
-        //enemyObject = (enemyObject == null) ? ResourceLoader.Instance().LoadGameObject(enemyName) : enemyObject;
+        enemyObject = (enemyObject == null) ? ResourceLoader.Instance().LoadGameObject(enemyName) : enemyObject;
 
         // if I don't kill all enemy and want to generate enemy, bug will appear because object reference is null
         _enemies = (_enemies == null) ? new List<GameObjectData>() : _enemies;
