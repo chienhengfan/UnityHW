@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     public bool IsDead = false;
     public int scoreOfEnemy = 5;
     public float currentHP = 30f;
-    public float MaxHP = 30f;
+    public float MaxHP = 60f;
     public Object destroyEffect;
     public Object touchEffect;
     public AudioClip destroyAudio;
