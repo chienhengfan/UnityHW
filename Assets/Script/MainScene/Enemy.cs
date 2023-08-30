@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class Enemy : MonoBehaviour
     public Object touchEffect;
     public AudioClip destroyAudio;
     public AudioClip touchAudio;
+    public GameObject objectUI;
 
     public void InitEnemy()
     {
@@ -32,6 +35,11 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator Damage(float miunsBlood)
     {
+        GameObject obj = Instantiate(objectUI, transform.position, Quaternion.identity);
+        objectUI.GetComponent<Canvas>().worldCamera = Camera.main;
+        obj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = miunsBlood.ToString();
+        Destroy(obj, 1f);
+
         currentHP -= miunsBlood;
 
         if (currentHP <= 0)
